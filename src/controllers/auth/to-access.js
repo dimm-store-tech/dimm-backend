@@ -22,7 +22,7 @@ export const loginController = async (req, res) => {
     res.json({ userFound, matchPassword });
   } catch (error) {
     console.log(error);
-    return res.status(401).json(["Error en el servidor en el login", error]);
+    return res.status(401).json({message: "Error en el servidor en el login", error});
   }
 };
 

@@ -43,7 +43,8 @@ export const createAdmin = async () => {
   console.log(`Usuario administrador creado => ${newUser.user}`)
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+
+(async () => {
   await createRoles();
   await createAdmin();
-});
+})();
