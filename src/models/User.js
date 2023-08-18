@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-
+import bcrypt from 'bcrypt'
 const userSchema = new mongoose.Schema(
   {
     user: { type: String, required: true, unique: true },
@@ -7,8 +7,7 @@ const userSchema = new mongoose.Schema(
     
     //Personal data  
     picture : { type: String, default: null},
-    first_name : { type: String , required: true },
-    second_name : { type: String , required: true },
+    name : { type: String , required: true },
     paternal_surname: { type: String , required: true },
     maternal_surname : { type: String , required: true }, 
     dni: { type: String , required: true },
@@ -24,5 +23,24 @@ const userSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
+
+userSchema.statics.encryptPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
+
+userSchema.statics.comparePassword = async (password, receivedPassword) => {
+  return await bcrypt.compare(password, receivedPassword)
+}
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (!user.isModified("password")) {
+    return next();
+  }
+  const hash = await bcrypt.hash(user.password, 10);
+  user.password = hash;
+  next();
+})
 
 export default model("User", userSchema);

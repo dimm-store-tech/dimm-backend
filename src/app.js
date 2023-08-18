@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors'
 import './database.js'
-import {FRONTEND_URL} from './config.js'
+import {FRONTEND_URL,API_URL} from './config.js'
 const app = express();
 
 // Settings
@@ -15,7 +15,7 @@ app.use(cookieParser())
 // Middlewares
 app.use(morgan('dev'))
 app.use(cors({
-    origin: FRONTEND_URL, 
+    origin: [FRONTEND_URL,'https://dimm-store.netlify.app'], 
     methods: "GET,POST,PUT,DELETE",
     credentials : true //Para poder establecer las cookies
 }))
