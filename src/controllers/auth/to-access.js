@@ -25,7 +25,7 @@ export const loginController = async (req, res) => {
       });
 
       res.cookie('token', token, { httpOnly: true }); // Configuración httpOnly
-    res.json({ userFound, matchPassword });
+    res.json({ userFound, matchPassword ,token});
   } catch (error) {
     console.log(error);
     return res.status(401).json({message: "Error en el servidor en el login", error});
