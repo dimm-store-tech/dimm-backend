@@ -3,7 +3,6 @@ import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors'
-import './database.js'
 import {FRONTEND_URL,API_URL} from './config.js'
 const app = express();
 

@@ -17,14 +17,14 @@ export const loginController = async (req, res) => {
       password,
       userFound.password
     );
-    console.log(matchPassword);
+
     if (!matchPassword) return res.status(400).json(["Contraseña incorrecta"]);
     
     const token = jwt.sign({ id: userFound._id }, MySecretKey, {
         expiresIn: 86400, // 24 hours
       });
 
-    res.cookie('token',token)
+      res.cookie('token', token, { httpOnly: true }); // Configuración httpOnly
     res.json({ userFound, matchPassword });
   } catch (error) {
     console.log(error);
