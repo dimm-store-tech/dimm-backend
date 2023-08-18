@@ -1,4 +1,5 @@
 import express from 'express';
+import serverless from "serverless-http";
 import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -23,3 +24,4 @@ app.use(cors({
 app.use('/api/auth/',authRoutes)
 
 export default app;
+export const handler = serverless(app);
