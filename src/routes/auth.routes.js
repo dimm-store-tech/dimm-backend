@@ -1,8 +1,10 @@
 import { Router } from "express";
-import {registerController,loginController,logoutController,profileController} from '../controllers/auth/to-access.js'
+import {registerController,loginController,logoutController,profileController,createCredentialsController} from '../controllers/auth/to-access.js'
 import { authRequired } from "../middlewares/authRequired.js";
 const router = Router();
 
+
+router.get('/create-credentials',createCredentialsController)
 
 router.post('/login',loginController)
 router.post('/register',registerController)

@@ -22,8 +22,5 @@ app.use(cors({
 // Rutes
 app.use('/api/auth/',authRoutes)
 
-// Crearte credentials
-setTimeout(() => {
-    import('./libs/initialSetup.js');
-  }, 5000);
+
 export default app;

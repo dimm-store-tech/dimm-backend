@@ -9,7 +9,7 @@ import {
   DNI_ADMI     
 } from '../config.js';
 
-export const createRoles = async () => {
+const createRoles = async () => {
   try {
     const count = await Role.estimatedDocumentCount();
     if(count > 0) return;
@@ -24,7 +24,7 @@ export const createRoles = async () => {
   }
 }
 
-export const createAdmin = async () => {
+const createAdmin = async () => {
   const userFound = await User.findOne({user: USER_ADMI});
   if(userFound) return;
 
@@ -43,8 +43,7 @@ export const createAdmin = async () => {
   console.log(`Usuario administrador creado => ${newUser.user}`)
 }
 
-
-(async () => {
+export default async function createCredentials() {
   await createRoles();
   await createAdmin();
-})();
+}
