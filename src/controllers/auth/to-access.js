@@ -24,7 +24,11 @@ export const loginController = async (req, res) => {
         expiresIn: 86400, // 24 hours
       });
 
-      res.cookie('token', token, { httpOnly: true }); // Configuración httpOnly
+    res.cookie('token', token, { 
+      httpOnly: true,
+      secure: true, // Solo se enviará en conexiones HTTPS
+      sameSite: 'strict' // Controla cuándo se envía la cookie
+    });
     res.json({ userFound, matchPassword ,token});
   } catch (error) {
     console.log(error);
