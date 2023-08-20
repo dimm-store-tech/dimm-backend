@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import User from "../../models/User.js";
 import Role from "../../models/Role.js";
 import createCredentials from '../../libs/initialSetup.js'
-import {MySecretKey} from '../../config.js'
+import {MySecretKey,isDevelopment} from '../../config.js'
 
 export const createCredentialsController = async (req, res) => {
   await createCredentials()
