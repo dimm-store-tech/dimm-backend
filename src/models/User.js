@@ -11,7 +11,11 @@ const userSchema = new mongoose.Schema(
     paternal_surname: { type: String , required: true },
     maternal_surname : { type: String , required: true }, 
     dni: { type: String , required: true },
-    roles: [
+    role:        {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role",
+    },
+    permissions: [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Role",

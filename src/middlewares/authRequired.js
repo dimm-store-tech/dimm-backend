@@ -1,10 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { MySecretKey } from '../config.js'
 export const authRequired = (req,res,next) => {
-    // is verified
-    const tokena= req.cookies.token
-    console.log(tokena)
-    const {token} = req.cookies
+    const token = req.headers['x-access-token'];
     if(!token) return res.status(401).json({message:"No token, authorization denied"})
     jwt.verify(token,MySecretKey, (err,user) => {
         if(err) return res.status(401).json({message:"Invalid token"});
