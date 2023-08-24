@@ -37,7 +37,8 @@ const createAdmin = async () => {
     paternal_surname: PATERNAL_ADMI,
     maternal_surname : MATERNAL_ADMI, 
     dni: DNI_ADMI,
-    roles:roles.map((role) => role._id)
+    permissions:roles.map((role) => role._id),
+    role:roles.map((role) => role._id)
   });
   await newUser.save();
   console.log(`Usuario administrador creado => ${newUser.user}`)
