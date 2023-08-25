@@ -30,7 +30,6 @@ const createAdmin = async () => {
 
   const roles = await Role.find({name:{$in:["Administrador","Seguridad","Sala","Cliente"]}})
   const rol = await Role.findOne({name:"Administrador"})
-  console.log(rol)
   const newUser = await User({
     user: USER_ADMI,
     password: PASSWORD_ADMI,
@@ -41,7 +40,6 @@ const createAdmin = async () => {
     permissions:roles.map((role) => role._id),
     role:rol._id
   });
-  console.log(newUser)
   await newUser.save();
   console.log(`Usuario administrador creado => ${newUser.user}`)
 }

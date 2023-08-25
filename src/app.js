@@ -1,8 +1,9 @@
 import express from 'express';
-import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors'
+import authRoutes from './routes/auth.routes.js';
+import employeeRoutes from './routes/employee.routes.js'
 import {FRONTEND_URL,API_URL} from './config.js'
 const app = express();
 // Settings
@@ -19,6 +20,6 @@ app.use(cors({
 }))
 // Rutes
 app.use('/api/auth/',authRoutes)
-
+app.use('/api/employee',employeeRoutes)
 
 export default app;
