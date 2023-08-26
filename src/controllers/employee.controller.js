@@ -1,6 +1,6 @@
+import mongoose from 'mongoose'
 import {createUser, getUsers} from '../controllers/auth/User.controller.js'
 import Employee from '../models/Employee.js'
-
 export const createEmployee = async (req,res) => {
     const {address,agge} = req.body
     const newUser = await createUser(req,res)
@@ -11,7 +11,28 @@ export const createEmployee = async (req,res) => {
     }).save()
     res.json({newUser,newEmployee})
 } 
-export const getEmployee = (req,res) => res.send('getEmployee')
+
+export const getEmployee = async (req,res) => {
+    try {
+        const {id} = req.params
+        console.log(id)
+        if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({ message: "Invalid credentials" });
+        const employeeFound = await Employee.findOne({_id:id}).populate({
+            path: 'user',
+            populate: [
+                { path: 'role' },
+                { path: 'permissions' }
+            ]
+    });
+    
+    if (!employeeFound) return res.status(404).json(["El empleado no existe"]);
+        
+        res.json(employeeFound)
+    } catch (error) {
+        console.log(error)
+    }
+}
  
 export const getEmployees = async(req,res) => {
     try {
